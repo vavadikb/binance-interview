@@ -7,10 +7,6 @@ const port = 3001
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
-
 
 // period - X days ago and 100 days maximum (api limit)
 // timestamp
