@@ -1,4 +1,6 @@
 const express = require('express')
+const getDataForCrypto = require('./services/binance')
+
 const app = express()
 const port = 3001
 
@@ -10,9 +12,10 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.get('/getCryptoData/:pair/:timestamp', (req, res) => {
-  console.log(req.params.pair, req.params.timestamp)
-  res.send()
+app.get('/getCryptoData/:pair/:timestamp', async (req, res) => {
+
+  const result = await getDataForCrypto(req.params.pair, req.params.timestamp)
+  res.send(result)
 })
 
 

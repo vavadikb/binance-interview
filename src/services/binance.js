@@ -1,11 +1,9 @@
-// const express = require('express')
-const fetch = require('fetch')
-
-
 async function getDataForCrypto(pair, timestamp) {
-    const url = "https://example.org/products.json";
+    const url = `https://api.binance.com/api/v3/klines?symbol=${pair}&interval=${timestamp}`;
+    console.log(url)
     try {
         const response = await fetch(url);
+        console.log(response)
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }
