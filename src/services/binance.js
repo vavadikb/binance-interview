@@ -21,17 +21,23 @@ async function getDataForCrypto(pair) {
 
 async function candlesAnalyzer(candles, period) {
     const candlesCopy = candles
-
     candlesCopy.reverse()
-    // console.log(candles)
-    const currentPrice = candles[0][1]
-    const pricePeriodAgo = candles[period-1][1]
-    const difference = currentPrice - pricePeriodAgo
-    console.log(pricePeriodAgo,currentPrice)
 
-    return difference
+    const currentPrice = candles[0][1]
+    const pricePeriodAgo = candles[period - 1][1]
+
+    const onePercentChange = pricePeriodAgo / 100
+    const difference = (currentPrice - pricePeriodAgo).toFixed(2)
+
+    const percentsDiff = (difference / onePercentChange).toFixed(2)
+
+    let status
+
+    pricePeriodAgo > currentPrice ? status = 'down' : status = 'up'
+
+    return { difference, percentsDiff, status }
 }
 
 
 
-module.exports = {getDataForCrypto,candlesAnalyzer}
+module.exports = { getDataForCrypto, candlesAnalyzer }
